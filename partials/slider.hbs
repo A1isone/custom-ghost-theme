@@ -1,0 +1,54 @@
+{{!--
+    Slider partial
+    Parameters:
+    - slider_id: unique id attribute for this slider instance
+    - title: optional section title displayed above the slider
+    - filter: filter string to be passed to the {{#get}} helper
+    - limit: number of posts to retrieve
+    - aria_label: optional accessible label for assistive tech (defaults to title)
+--}}
+{{#get "posts" filter=filter include="authors,tags" limit=limit order="published_at desc"}}
+    {{#if posts}}
+    <section class="gh-slider-section" data-slider="{{slider_id}}" role="region" {{#if title}}aria-labelledby="{{slider_id}}-title"{{/if}} {{#if aria_label}}aria-label="{{aria_label}}"{{/if}}>
+        <div class="gh-container">
+            {{!-- Slider heading --}}
+            {{#if title}}
+            <header class="gh-slider-header">
+                <h2 id="{{slider_id}}-title" class="gh-slider-title">{{title}}</h2>
+            </header>
+            {{/if}}
+
+            {{!-- Slider track and navigation controls --}}
+            <div class="gh-slider-frame">
+                <button class="gh-slider-control gh-slider-control--prev" type="button" aria-label="Previous {{#if title}}{{title}}{{else}}posts{{/if}}" data-slider-prev>
+                    {{> "icons/arrow-left"}}
+                </button>
+                <div class="gh-slider-track" data-slider-track tabindex="0">
+                    {{#foreach posts}}
+                    <article class="gh-slider-item">
+                        <a class="gh-slider-link" href="{{url}}">
+                            {{#if feature_image}}
+                            <figure class="gh-slider-media">
+                                <img src="{{img_url feature_image size="l"}}" alt="{{title}}" loading="lazy" />
+                            </figure>
+                            {{/if}}
+                            <div class="gh-slider-content">
+                                {{#if primary_tag}}
+                                <span class="gh-slider-tag">{{primary_tag.name}}</span>
+                                {{/if}}
+                                <h3 class="gh-slider-post-title">{{title}}</h3>
+                                <p class="gh-slider-excerpt">{{excerpt words="22"}}</p>
+                                <time class="gh-slider-date" datetime="{{date published_at format="YYYY-MM-DD"}}">{{date published_at format="MMM D, YYYY"}}</time>
+                            </div>
+                        </a>
+                    </article>
+                    {{/foreach}}
+                </div>
+                <button class="gh-slider-control gh-slider-control--next" type="button" aria-label="Next {{#if title}}{{title}}{{else}}posts{{/if}}" data-slider-next>
+                    {{> "icons/arrow-right"}}
+                </button>
+            </div>
+        </div>
+    </section>
+    {{/if}}
+{{/get}}
