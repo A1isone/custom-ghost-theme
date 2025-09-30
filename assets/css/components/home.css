@@ -1,0 +1,65 @@
+/*
+Home page specific layout styles
+---------------------------------------------------------- */
+
+.gh-home {
+    display: flex;
+    flex-direction: column;
+    gap: 8vmin;
+}
+
+.gh-home-section-title {
+    font-size: clamp(2.4rem, 2.2rem + 0.8vw, 3.2rem);
+    margin: 0 0 2rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.gh-home-social {
+    background: var(--color-bg, #f7f7f7);
+    padding: 6vmin 0;
+}
+
+.gh-home-social-embed {
+    position: relative;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: #ffffff;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.gh-home-social-placeholder {
+    padding: 4vmin 5vmin;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+
+.gh-postfeed--home {
+    padding: 4vmin 0 0;
+}
+
+.gh-home-grid .gh-pagination {
+    margin: 6vmin 0 0;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .gh-home {
+        gap: 6vmin;
+    }
+
+    .gh-home-social {
+        padding: 8vmin 0;
+    }
+
+    .gh-home-social-placeholder {
+        font-size: 1.5rem;
+    }
+}

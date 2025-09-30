@@ -1,0 +1,42 @@
+{{!< default}}
+
+{{!--
+    Custom homepage layout with featured sliders, social feed, and post grid
+--}}
+<div class="gh-home">
+    {{!-- Primary featured slider --}}
+    {{> "slider" slider_id="featured-slider" title="Featured Stories" filter="tag:featured" limit="5" aria_label="Featured stories"}}
+
+    {{!-- Social feed placeholder section --}}
+    <section class="gh-home-social" aria-labelledby="social-feed-title">
+        <div class="gh-container">
+            <h2 id="social-feed-title" class="gh-home-section-title">From the Community</h2>
+            <div class="gh-home-social-embed" role="complementary" aria-label="Embedded social feed placeholder">
+                <div class="gh-home-social-placeholder">
+                    <p>Add your social feed widget here (e.g. Twitter, Elfsight, etc.).</p>
+                    <p>This placeholder keeps the layout stable until an embed is configured.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{!-- Secondary featured slider --}}
+    {{> "slider" slider_id="secondary-slider" title="More Highlights" filter="tag:secondary-feature" limit="4" aria_label="Secondary highlights"}}
+
+    {{!-- Post grid for remaining posts --}}
+    <section class="gh-home-grid" aria-labelledby="latest-posts-title">
+        <div class="gh-container">
+            <h2 id="latest-posts-title" class="gh-home-section-title">Latest Posts</h2>
+            <div class="gh-postfeed gh-postfeed--home">
+                {{#foreach posts}}
+                    {{^has tag="featured,secondary-feature"}}
+                        {{> "card" page=../pagination.page }}
+                    {{/has}}
+                {{/foreach}}
+            </div>
+            <div class="gh-pagination">
+                {{pagination}}
+            </div>
+        </div>
+    </section>
+</div>
