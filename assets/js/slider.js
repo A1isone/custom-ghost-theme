@@ -54,6 +54,11 @@ const bindSlider = (slider) => {
     updateControls(track, prev, next);
 };
 
+/**
+ * Initializes all sliders on the page by locating elements with `data-slider` and binding slider behavior to each.
+ *
+ * Does nothing if no `data-slider` elements are found.
+ */
 export default function initSliders() {
     const sliders = document.querySelectorAll('[data-slider]');
     if (!sliders.length) {
